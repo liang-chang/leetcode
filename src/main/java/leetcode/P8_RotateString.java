@@ -24,16 +24,32 @@ public class P8_RotateString {
 		System.out.println(str);
 		
 
+		str = "".toCharArray();
+		rotateString(str, 10);
+		System.out.println(str);
+		
+		str = "ubuntu".toCharArray();
+		rotateString(str, 6);
+		System.out.println(str);
+		
+		str = "cppjavapy".toCharArray();
+		rotateString(str, 25);
+		System.out.println(str);
 
 	}
 
 	public static void rotateString(char[] r, int offset) {
 		
-		if(offset<=0){
+		
+		if(offset<=0 || r.length<=0){
 			return;
 		}
 		
-		offset = offset > r.length ?(offset-r.length):offset;
+		offset = offset >= r.length ?(offset%r.length):offset;
+		
+		if(offset<=0 || r.length<=0){
+			return;
+		}
 		
 		
 		int startIndex=0;
