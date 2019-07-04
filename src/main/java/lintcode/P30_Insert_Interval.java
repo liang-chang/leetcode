@@ -1,4 +1,4 @@
-package leetcode;
+package lintcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +26,8 @@ public class P30_Insert_Interval {
 		// Interval(5, 8), new Interval(11, 14))),
 		// new Interval(2, 12)));
 
-		System.out.println(insert(new ArrayList<>(Arrays.asList(new Interval(1, 5))), new Interval(1, 7)));
+//		System.out.println(insert(new ArrayList<>(Arrays.asList(new Interval(1, 5))), new Interval(1, 7)));
+		System.out.println(insert(new ArrayList<>(Arrays.asList(new Interval(1, 5))), new Interval(0, 0)));
 	}
 
 	public static List<Interval> insert(List<Interval> intervals, Interval newInterval) {
@@ -42,8 +43,12 @@ public class P30_Insert_Interval {
 
 		// 节点去重及消除
 		for (Interval interval : intervals) {
+			
 			putPoint(pointMap, interval.start, START_POINT_TYPE);
-			putPoint(pointMap, interval.end, END_POINT_TYPE);
+			
+			if(interval.start != interval.end){
+				putPoint(pointMap, interval.end, END_POINT_TYPE);				
+			}
 		}
 
 		// 节点放入去重后的点
@@ -69,6 +74,10 @@ public class P30_Insert_Interval {
 			}
 
 			int j = bitSet.nextSetBit(i + 1);
+			
+			if (j < 0) {
+				break;
+			}
 
 			if (pointMap.get(i).equals(pointMap.get(j))) {
 				// 类型相同
@@ -78,8 +87,6 @@ public class P30_Insert_Interval {
 
 				bitSet.clear(clearP);
 			}
-
-			i = j;
 		}
 
 		List<Interval> ret = new LinkedList<>();

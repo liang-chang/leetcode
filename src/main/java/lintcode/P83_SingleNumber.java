@@ -1,4 +1,4 @@
-package leetcode;
+package lintcode;
 
 public class P83_SingleNumber {
 

@@ -1,4 +1,4 @@
-package leetcode;
+package lintcode;
 public class P8_RotateString {
 
 	public static void main(String[] args) {

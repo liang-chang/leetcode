@@ -1,4 +1,4 @@
-package leetcode;
+package lintcode;
 
 public class P1775_Find_The_Numbers_II {
 
