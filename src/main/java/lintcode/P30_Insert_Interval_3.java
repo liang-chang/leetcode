@@ -45,10 +45,12 @@ public class P30_Insert_Interval_3 {
 			if (s < current.start) {
 				// 起止点在当前之前
 				if (e < current.start) {
+					//开始和结束在前面
 					ret.add(ni);
 					ret.add(current);
 					ni = null; // 标记为处理完成
 				} else if (e <= current.end) {
+					//结束端点落在当前区间					
 					ni.end = current.end;
 					ret.add(ni);
 					ni = null; // 标记为处理完成
