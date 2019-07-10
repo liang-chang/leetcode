@@ -13,22 +13,25 @@ public class P107_Word_Break_2 {
 
 	public static void main(String[] args) {
 
-		System.out.println(wordBreak("lintcode",
-				new HashSet<String>(Arrays.asList("lint", "code"))));
+		// System.out.println(wordBreak("lintcode",
+		// new HashSet<String>(Arrays.asList("lint", "code"))));
+		//
+		// System.out.println(wordBreak("a",
+		// new HashSet<String>(Arrays.asList("a"))));
 
-		System.out.println(wordBreak("a",
-				new HashSet<String>(Arrays.asList("a"))));
+		// System.out.println(wordBreak("eecdababa",
+		// new HashSet<String>(Arrays.asList("e", "aba", "cdab"))));
 
-		System.out.println(wordBreak("eecdababa",
-				new HashSet<String>(Arrays.asList("e", "aba", "cdab"))));
+		// System.out.println(wordBreak("a",
+		// new HashSet<String>(Arrays.asList("aba", "cdab"))));
 
-		System.out.println(wordBreak("a",
-				new HashSet<String>(Arrays.asList("aba", "cdab"))));
+		// System.out.println(wordBreak("a", new HashSet<String>()));
 
-		System.out.println(wordBreak("a", new HashSet<String>()));
+		// System.out.println(wordBreak("aaab",
+		// new HashSet<String>(Arrays.asList("b", "aa"))));
 
-		System.out.println(wordBreak("aaab",
-				new HashSet<String>(Arrays.asList("b", "aa"))));
+		System.out.println(wordBreak("cars",
+				new HashSet<String>(Arrays.asList("car", "ca", "rs"))));
 
 	}
 
@@ -53,7 +56,14 @@ public class P107_Word_Break_2 {
 		for (int i = 0, len = s.length(); i < len; i++) {
 
 			for (String word : words) {
-				if ((i = s.indexOf(word, i)) < 0) {
+				int index = 0;
+				if ((index = s.indexOf(word, i)) < 0) {
+					continue;
+				}
+
+				i = index;
+
+				if (testHashMark(i, i + word.length(), bs)) {
 					continue;
 				}
 
@@ -73,12 +83,11 @@ public class P107_Word_Break_2 {
 
 						int index = s.indexOf(word, j);
 
-
 						if (index < 0) {
 
 							break;
 						}
-						
+
 						j = index;
 
 						if (testHashMark(index, index + word.length(), bs)) {
@@ -86,8 +95,8 @@ public class P107_Word_Break_2 {
 						}
 
 						push(index, word, bs, stack, words);
-						
-						break;
+
+						continue;
 					}
 				}
 
@@ -95,11 +104,17 @@ public class P107_Word_Break_2 {
 					return true;
 				}
 
+				clear(bs, stack);
 				break;
 			}
 		}
 
 		return false;
+	}
+
+	public static void clear(BitSet bs, Deque<Integer> stack) {
+		bs.clear();
+		stack.clear();
 	}
 
 	/**
