@@ -1,8 +1,10 @@
 package lintcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -10,6 +12,23 @@ import java.util.Set;
 public class P107_Word_Break_2 {
 
 	public static void main(String[] args) {
+
+		System.out.println(wordBreak("lintcode",
+				new HashSet<String>(Arrays.asList("lint", "code"))));
+
+		System.out.println(wordBreak("a",
+				new HashSet<String>(Arrays.asList("a"))));
+
+		System.out.println(wordBreak("eecdababa",
+				new HashSet<String>(Arrays.asList("e", "aba", "cdab"))));
+
+		System.out.println(wordBreak("a",
+				new HashSet<String>(Arrays.asList("aba", "cdab"))));
+
+		System.out.println(wordBreak("a", new HashSet<String>()));
+
+		System.out.println(wordBreak("aaab",
+				new HashSet<String>(Arrays.asList("b", "aa"))));
 
 	}
 
@@ -31,42 +50,53 @@ public class P107_Word_Break_2 {
 
 		words.sort((a, b) -> b.length() - a.length());
 
-		int first = -1;
-
-		for (String word : words) {
-			if ((first = s.indexOf(word)) < 0) {
-				continue;
-			}
-			push(first, word, bs, stack, words);
-			break;
-		}
-
-		if (stack.size() <= 0) {
-			return false;
-		}
-
-		while (true) {
+		for (int i = 0, len = s.length(); i < len; i++) {
 
 			for (String word : words) {
-
-				int index = s.indexOf(word);
-
-				if (index < 0) {
+				if ((i = s.indexOf(word, i)) < 0) {
 					continue;
 				}
 
-				if (testHashMark(index, index + word.length(), bs)) {
-					continue;
+				push(i, word, bs, stack, words);
+				break;
+			}
+
+			if (stack.size() <= 0) {
+				return false;
+			}
+
+			while (true) {
+
+				for (String word : words) {
+
+					for (int j = 0, len2 = s.length(); j < len2; j++) {
+
+						int index = s.indexOf(word, j);
+
+
+						if (index < 0) {
+
+							break;
+						}
+						
+						j = index;
+
+						if (testHashMark(index, index + word.length(), bs)) {
+							continue;
+						}
+
+						push(index, word, bs, stack, words);
+						
+						break;
+					}
 				}
 
-				push(index, word, bs, stack, words);
-			}
+				if (bs.cardinality() >= s.length()) {
+					return true;
+				}
 
-			if (bs.cardinality() >= s.length()) {
-				return true;
+				break;
 			}
-
-			break;
 		}
 
 		return false;
@@ -96,13 +126,14 @@ public class P107_Word_Break_2 {
 
 		String word = words.get(stack.size());
 
-		bs.set(index, index + word.length() + 1, false);
+		bs.set(index, index + word.length(), false);
 	}
 
-	public static void push(int index, String word, BitSet bs, Deque<Integer> stack, List<String> words) {
+	public static void push(int index, String word, BitSet bs,
+			Deque<Integer> stack, List<String> words) {
 		stack.push(index);
 
-		bs.set(index, index + word.length() + 1, true);
+		bs.set(index, index + word.length(), true);
 	}
 
 }
