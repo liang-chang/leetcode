@@ -28,8 +28,8 @@ public class P107_Word_Break_2 {
 		Deque<Integer> stack = new LinkedList<>();
 
 		List<String> words = new ArrayList<>(dict);
-		
-		words.sort((a,b)->b.length()-a.length());
+
+		words.sort((a, b) -> b.length() - a.length());
 
 		int first = -1;
 
@@ -61,8 +61,8 @@ public class P107_Word_Break_2 {
 
 				push(index, word, bs, stack, words);
 			}
-			
-			if(bs.cardinality()>=s.length()){
+
+			if (bs.cardinality() >= s.length()) {
 				return true;
 			}
 
