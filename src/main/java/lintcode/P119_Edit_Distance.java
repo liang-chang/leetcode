@@ -4,18 +4,14 @@ public class P119_Edit_Distance {
 
 	public static void main(String[] args) {
 
-		System.out.println(minDistance("horse", "ros"));
-		System.out.println(minDistance("intention", "execution"));
-		System.out.println(minDistance("b", ""));
+		 System.out.println(minDistance("horse", "ros"));
+		 System.out.println(minDistance("intention", "execution"));
+		 System.out.println(minDistance("b", ""));
 		System.out.println(minDistance("a", "a"));
 	}
 
 	/**
-	 * @param word1
-	 *            : A string
-	 * @param word2
-	 *            : A string
-	 * @return: The minimum number of steps.
+	 * LCS 算法的变种
 	 */
 	public static int minDistance(String word1, String word2) {
 
@@ -32,7 +28,7 @@ public class P119_Edit_Distance {
 		for (int i = 0, len = word1.length(); i <= len; i++) {
 			for (int j = 0, len2 = word2.length(); j <= len2; j++) {
 				if (i == 0 || j == 0) {
-					dp[i][j] = (i == 0 && j == 0) ? 0 : ((i == 0 ? j : i) + 1);
+					dp[i][j] = (i == j) ? 0 : Math.max(i, j);
 					continue;
 				}
 
