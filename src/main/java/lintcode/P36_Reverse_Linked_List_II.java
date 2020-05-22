@@ -1,21 +1,31 @@
 package lintcode;
 
-public class P35_Reverse_Linked_List {
+public class P36_Reverse_Linked_List_II {
 
     public static void main(String[] args) {
         ListNode list = null;
 
         list = generate(1, 2, 3, 4, 5, 6);
         System.out.println(list);
-        System.out.println(reverse(list));
+        System.out.println(reverseBetween(list,2,3));
 
         list = generate(1);
         System.out.println(list);
-        System.out.println(reverse(list));
+        System.out.println(reverseBetween(list,1,2));
     }
 
-    public static ListNode reverse(ListNode head) {
+    /**
+     * 1 ≤ m ≤ n ≤ length
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+    public static ListNode reverseBetween(ListNode head, int m, int n) {
         if (head == null || head.next == null) {
+            return head;
+        }
+        if (m == n) {
             return head;
         }
 
