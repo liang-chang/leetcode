@@ -31,18 +31,16 @@ public class P36_Reverse_Linked_List_II {
 
         ListNode newHead = new ListNode(0);
         newHead.next=head;
-        ListNode next    = head.next;
-        head.next=null;
+        ListNode tail = newHead.next;
 
-        ListNode t = null;
-        for (; next.next != null; next = t) {
-            t = next.next;
-            next.next = newHead.next;
-            newHead.next = next;
-        }
-        //最后一个
-        next.next = newHead.next;
-        newHead.next = next;
+        //计数下标从1开始
+        int i=1;
+
+
+
+
+
+
 
         return newHead.next;
     }
