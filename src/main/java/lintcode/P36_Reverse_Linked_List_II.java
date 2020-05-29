@@ -7,11 +7,15 @@ public class P36_Reverse_Linked_List_II {
 
         list = generate(1, 2, 3, 4, 5, 6);
         System.out.println(list);
-        System.out.println(reverseBetween(list,2,3));
+        System.out.println(reverseBetween(list,2,4));
+
+        list = generate(1, 2, 3, 4, 5, 6);
+        System.out.println(list);
+        System.out.println(reverseBetween(list,1,6));
 
         list = generate(1);
         System.out.println(list);
-        System.out.println(reverseBetween(list,1,2));
+        System.out.println(reverseBetween(list,1,1));
     }
 
     /**
@@ -29,20 +33,39 @@ public class P36_Reverse_Linked_List_II {
             return head;
         }
 
-        ListNode newHead = new ListNode(0);
-        newHead.next=head;
-        ListNode tail = newHead.next;
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next=head;
+        ListNode tail = dummyHead.next;
 
-        //计数下标从1开始
-        int i=1;
+        ListNode newHead = dummyHead;
+        ListNode reverseHead = linkedListSplit(dummyHead,m);
+        reverse(reverseHead,m,n);
+        return dummyHead.next;
+    }
 
+    private static ListNode reverse(ListNode head,int m, int n){
 
+        ListNode next = head.next;
+        ListNode tail = head.next;
+        head.next=null;
+        ListNode t    = null;
+        for (int i = m; i <= n; i++) {
+            t = next.next;
+            next.next = head.next;
+            head.next = next;
+            next = t;
+        }
 
+        tail.next=next;
+        return next;
+    }
 
-
-
-
-        return newHead.next;
+    private static ListNode linkedListSplit(ListNode newHead, int m){
+        ListNode next = newHead;
+        for (int i = 1; i < m; i++) {
+            next=next.next;
+        }
+        return next;
     }
 
     public static ListNode generate(int... a) {
