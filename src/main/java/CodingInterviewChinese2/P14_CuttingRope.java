@@ -2,7 +2,7 @@ package CodingInterviewChinese2;
 
 import org.omg.Messaging.SyncScopeHelper;
 
-public class CuttingRope {
+public class P14_CuttingRope {
 
     public static void main(String[] args) {
         System.out.println(maxProductAfterCutting_solution1(8));
