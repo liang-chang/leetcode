@@ -1,17 +1,13 @@
 package leetcode;
 
-import lintcode.P7_Serialize_and_Deserialize_Binary_Tree;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class P236_Lowest_Common_Ancestor_of_a_Binary_Tree {
+public class P107_Binary_Tree_Level_Order_Traversal_II {
     public static class TreeNode {
         int      val;
         TreeNode left;
@@ -35,31 +31,52 @@ public class P236_Lowest_Common_Ancestor_of_a_Binary_Tree {
 
         System.out.println(deserialize);
 
-        TreeNode treeNode = lowestCommonAncestor(deserialize[0], deserialize[1], deserialize[10]);
 
+        List<List<Integer>> lists = levelOrderBottom(deserialize[0]);
     }
 
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> lists = levelOrder(root);
 
-    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null) {
-            return root;
-        }
-        if (root == p || root == q) {
-            return root;
-        }
-        TreeNode left  = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        //0 1 2 3 4 5
+        //0 1 2 3 4
 
-        if (left != null && right != null) {
-            return root;
+        for(int i=0,j = lists.size()/2 ,len =lists.size() ; i < j ; i++){
+            List<Integer> t = lists.get(i);
+            lists.set(i,lists.get(len-1-i));
+            lists.set(len-1-i,t);
         }
-        if (left != null) {
-            return left;
+        return lists;
+    }
+
+    public static List<List<Integer>> levelOrder(TreeNode root) {
+        if(root == null){
+            //Collection.emptyList();
+            return new ArrayList<>(0);
         }
-        if (right != null) {
-            return right;
+
+        List<List<Integer>> ret = new LinkedList<>();
+
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.addLast(root);
+        int leftCnt = 1;//放入头结点
+
+        while(deque.size() > 0){
+            List<Integer> level = new ArrayList<>(deque.size()*2);
+            for(int i=0 ; i< leftCnt ; i++){
+                TreeNode node = deque.poll();
+                level.add(node.val);
+                if(node.left != null){
+                    deque.addLast(node.left);
+                }
+                if(node.right != null){
+                    deque.addLast(node.right);
+                }
+            }
+            leftCnt = deque.size();
+            ret.add(level);
         }
-        return null;
+        return ret;
     }
 
     public static boolean nullNode(String s){
