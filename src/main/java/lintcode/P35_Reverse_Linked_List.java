@@ -1,9 +1,11 @@
 package lintcode;
 
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 
 public class P35_Reverse_Linked_List {
 
@@ -14,7 +16,13 @@ public class P35_Reverse_Linked_List {
         System.out.println(list);
         System.out.println(reverse(list));
 
+
         System.out.println(generate());
+
+        list = generate(1);
+        System.out.println(list);
+        System.out.println(reverse(list));
+
     }
 
     public static ListNode reverse(ListNode head) {
@@ -22,17 +30,23 @@ public class P35_Reverse_Linked_List {
             return head;
         }
 
-        ListNode newHead = head;
+        ListNode newHead = new ListNode(0);
+        newHead.next=head;
         ListNode next    = head.next;
         head.next=null;
 
-        ListNode t=null;
+        ListNode t = null;
         for (; next.next != null; next = t) {
             t = next.next;
-            next.next = newHead;
+            next.next = newHead.next;
             newHead.next = next;
         }
-        return newHead;
+        //最后一个
+        next.next = newHead.next;
+        newHead.next = next;
+
+        return newHead.next;
+
     }
 
     public static ListNode generate(int... a) {
