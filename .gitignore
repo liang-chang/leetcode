@@ -5,6 +5,7 @@
 /.settings/org.eclipse.ltk.core.refactoring.prefs
 /.settings/org.eclipse.m2e.core.prefs
 /.settings/org.eclipse.core.resources.prefs
+/.idea/
 .idea/compiler.xml
 .idea/encodings.xml
 .idea/jarRepositories.xml
