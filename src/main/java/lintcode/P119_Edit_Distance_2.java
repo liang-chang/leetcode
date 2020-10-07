@@ -39,6 +39,7 @@ public class P119_Edit_Distance_2 {
 
 
     /**
+     * 自机向下
      * 字符 a 变成 b 需要步骤
      *
      * @param dp
@@ -68,13 +69,13 @@ public class P119_Edit_Distance_2 {
         if (ca == cb) {
             dp[i][j] = dp(dp, a, i - 1, b, j - 1);
         } else {
-            //增, a字符当前位置插入一个与b相等的字符,a 字符变长但当前下标不变,b 字符向前移一格
+            //增, a字符当前位置后面插入一个与b相等的字符,a 字符变长但当前下标不变,b 字符向前移一格
             int x = dp(dp, a, i, b, j - 1);
 
-            //删, a字符当前位置删除一个字符,a 字符变短但当前下标前移一下,b 不会
+            //删, a字符当前位置删除字符,a 字符变短但当前下标前移一下,b 不会
             int y = dp(dp, a, i - 1, b, j);
 
-            //改 ,a字符当前位置改成与了一样, 字符 a ,b 都向前移一位
+            //改 ,a字符当前位置改成与b一样, 字符 a ,b 都向前移一位
             int z = dp(dp, a, i - 1, b, j - 1);
 
             dp[i][j] = Math.min(x, Math.min(y, z)) + 1;
