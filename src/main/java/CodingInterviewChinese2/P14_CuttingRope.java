@@ -5,12 +5,7 @@ import org.omg.Messaging.SyncScopeHelper;
 public class P14_CuttingRope {
 
     public static void main(String[] args) {
-        System.out.println(maxProductAfterCutting_solution1(8));
-
-        String a = new String("abc");
-        String b = new String("abc");
-        System.out.println(a.hashCode());
-        System.out.println(b.hashCode());
+        System.out.println(maxProductAfterCutting_solution1(5));
 
     }
 
@@ -22,18 +17,21 @@ public class P14_CuttingRope {
 
     // ====================动态规划====================
     public static int maxProductAfterCutting_solution1(int length) {
-        if (length < 2)
+        if (length < 2) //长度小于2,没法剪
             return 0;
-        if (length == 2)
+        if (length == 2) //最少要剪1刀,所以为1
             return 1;
-        if (length == 3)
+        if (length == 3)//剪2刀,1*2=2
             return 2;
 
+        //products 解释
+        //f(4)=max{1*3,2*2}=4
+        //f(5)=max{1*4,2*3}=6
         int[] products = new int[length + 1];
         products[0] = 0;
-        products[1] = 1;
-        products[2] = 2;
-        products[3] = 3;
+        products[1] = 1; //长度为1时,最大的长度
+        products[2] = 2; //长度为2时,最大的长度
+        products[3] = 3; //长度为3时,最大的长度
 
         int max = 0;
         for (int i = 4; i <= length; ++i) {
