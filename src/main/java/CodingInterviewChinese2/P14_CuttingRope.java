@@ -29,9 +29,9 @@ public class P14_CuttingRope {
         //f(5)=max{1*4,2*3}=6
         int[] products = new int[length + 1];
         products[0] = 0;
-        products[1] = 1; //长度为1时,最大的长度
-        products[2] = 2; //长度为2时,最大的长度
-        products[3] = 3; //长度为3时,最大的长度
+        products[1] = 1; //长度为1时,不剪的最大的长度
+        products[2] = 2; //长度为2时,不剪的最大的长度
+        products[3] = 3; //长度为3时,不剪的最大的长度
 
         int max = 0;
         for (int i = 4; i <= length; ++i) {
