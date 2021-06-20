@@ -1,5 +1,7 @@
 package test;
 
+import java.util.LinkedHashMap;
+
 public class Test {
 
     public static void main(String[] args) {
@@ -12,5 +14,13 @@ public class Test {
                 System.out.println("("+i+","+j+")");
             }
         }
+
+
+        LinkedHashMap<String,Object> map = new LinkedHashMap<>();
+        map.put("a","b");
+        map.put("b","c");
+
+
+        System.out.println(System.getProperty("java.io.tmpdir"));
     }
 }
