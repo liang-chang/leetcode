@@ -21,7 +21,7 @@ public class P14_CuttingRope {
             return 0;
         if (length == 2) //最少要剪1刀,所以为1
             return 1;
-        if (length == 3)//剪2刀,1*2=2
+        if (length == 3)//剪1刀,1*2=2
             return 2;
 
         //products 解释
@@ -30,10 +30,11 @@ public class P14_CuttingRope {
         int[] products = new int[length + 1];
         products[0] = 0;
         products[1] = 1; //长度为1时,不剪的最大的长度
-        products[2] = 2; //长度为2时,不剪的最大的长度
-        products[3] = 3; //长度为3时,不剪的最大的长度
+        products[2] = 2; //长度为2时,不剪的最大的长度；上面已经返回长度为2时剪一刀最大乘积
+        products[3] = 3; //长度为3时,不剪的最大的长度；上面已经返回长度为3时剪一刀最大乘积
 
         int max = 0;
+        //从长度为4的开始
         for (int i = 4; i <= length; ++i) {
             max = 0;
             for (int j = 1; j <= i / 2; ++j) {

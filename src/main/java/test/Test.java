@@ -5,22 +5,22 @@ import java.util.LinkedHashMap;
 public class Test {
 
     public static void main(String[] args) {
+        int[] nums = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+        System.out.println(binarySearch(nums, 8));
 
-        int n=5;
-        for (int l = 2; l <= n; l++) {
-            for (int i = 0; i <= n - l; i++) {
-                int j = l + i - 1;
-                // 计算 dp[i][j]
-                System.out.println("("+i+","+j+")");
-            }
+    }
+
+    static int binarySearch(int[] nums, int target) {
+        int l = 0, r = nums.length - 1;
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                l = mid + 1;
+            } else
+                r = mid - 1;
         }
-
-
-        LinkedHashMap<String,Object> map = new LinkedHashMap<>();
-        map.put("a","b");
-        map.put("b","c");
-
-
-        System.out.println(System.getProperty("java.io.tmpdir"));
+        return -1;
     }
 }

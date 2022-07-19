@@ -12,8 +12,8 @@ public class P17_Print1ToMaxOfNDigits {
         if (n <= 0)
             return;
 
-        char[] number = new char[n + 1];
-        number[n] = '\0';
+        char[] number = new char[n];
+        //number[n] = '\0';
 
         for (int i = 0; i < 10; ++i) {
             number[0] = (char) (i + '0');

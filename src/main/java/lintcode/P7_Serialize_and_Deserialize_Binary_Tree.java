@@ -7,6 +7,7 @@ public class P7_Serialize_and_Deserialize_Binary_Tree {
 
 	public static void main(String[] args) {
 
+		//广度优先序列化
 		TreeNode deserialize = deserialize("3,9,20,#,#,15,7");
 		
 		String serialize = serialize(deserialize);
